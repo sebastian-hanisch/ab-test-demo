@@ -55,6 +55,17 @@ bekannt, deshalb lässt sich messen, **ob ein Test hält, was er verspricht**: w
 enthält, wie oft er bei gleichen Regeln fälschlich anschlägt und wie viele Fenster er für einen echten Effekt braucht.
 """
 )
+
+# erklaerseite:einfach:start (erzeugt von tools/set_demo_explainer.py (Website-Repo) aus tools/content/explainers/ab-test-erklaert.json, nicht von Hand ändern)
+with st.expander("💬 In einfachen Worten"):
+    st.markdown(
+        """
+Ein Standort will wissen, ob eine neue Bestellregel weniger Fehlmengen bringt als die bisherige. Ein einzelner Monat sagt wenig, denn die Nachfrage schwankt zufällig. Beim **A/B-Test** teilt man viele Vier-Wochen-Abschnitte der Standorte zufällig auf die alte und die neue Regel auf und vergleicht die Ergebnisse. Ein Intervall gibt an, in welchem Bereich die wahre Wirkung vermutlich liegt, und der p-Wert zeigt, ob der Unterschied größer ist, als der Zufall allein erklärt. Die Demo kennt die wahre Wirkung und misst deshalb, wie oft der Test richtig liegt, wie oft er fälschlich anschlägt und wie viele Abschnitte er braucht. Es ist ein stark vereinfachtes Modell mit erfundenen Daten.
+
+[Ausführlich und verständlich erklärt, mit Fachteil](https://sebastianhanisch.net/ab-test-erklaert.html)
+        """
+    )
+# erklaerseite:einfach:end
 st.caption(
     "Erstes Stück der Linie „Experimente und Wirkungsmessung“. Jedes Folgestück hebt eine der Annahmen unter „Wo die "
     "Annahmen enden“ auf. Das Vehikel ist ein Standort mit täglicher Nachbestellung; die Kennzahl ist der Servicegrad, also "
@@ -247,6 +258,28 @@ st.caption(
 
 st.markdown("---")
 with st.expander("📐 Mathematische Formulierung"):
+    # erklaerseite:lesehilfe:start (erzeugt von tools/set_demo_explainer.py (Website-Repo) aus tools/content/explainers/ab-test-erklaert.json, nicht von Hand ändern)
+    st.markdown(
+        r"""
+**Lesehilfe.** Gegeben sind zwei Regeln A und B mit je $n$ simulierten Standort-Fenstern und ihrem gemessenen Servicegrad. Gesucht sind die gemessene Wirkung $\hat\Delta$ mit ihrem Intervall und die Zahl der Fenster je Arm, die für eine gewünschte Teststärke nötig ist.
+
+| Symbol | Bedeutung |
+|---|---|
+| $\bar x_A$, $\bar x_B$ | Mittelwert des Servicegrads der Fenster in Arm A bzw. B |
+| $s_A^2$, $s_B^2$ | gemessene Varianz in Arm A bzw. B |
+| $n_A$, $n_B$ | Zahl der Fenster in Arm A bzw. B |
+| $\hat\Delta$ | gemessene Wirkung: Mittelwert B minus Mittelwert A |
+| $\Delta$ | wahre Wirkung (im Vehikel bekannt) |
+| $\widehat{SE}$ | Standardfehler der gemessenen Wirkung |
+| $t_{0{,}975,\nu}$, $\nu$ | Quantil der t-Verteilung, Freiheitsgrade nach Welch-Satterthwaite |
+| $\alpha$, $1-\beta$ | Signifikanzniveau, Teststärke |
+| $z_{1-\alpha/2}$, $z_{1-\beta}$ | Quantile der Normalverteilung zu $\alpha$ (zweiseitig) und zur Teststärke |
+| $\sigma_A^2$, $\sigma_B^2$ | Varianz der Fenster in Arm A bzw. B |
+
+[Schritt für Schritt erklärt, mit Herleitung und Literatur](https://sebastianhanisch.net/ab-test-erklaert.html#fachleute)
+        """
+    )
+    # erklaerseite:lesehilfe:end
     st.markdown(
         r"""
 **Vehikel.** Tagesnachfrage $D_t$ negativ-binomial (Gamma-Poisson) mit Mittel $\mu = 20$ und Varianz
